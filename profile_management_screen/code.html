@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile Management - SolarMonitor</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-50 font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Sidebar -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#151b2b] flex flex-col h-full transition-all duration-300 hidden md:flex">
+<!-- Logo Section -->
+<div class="h-16 flex items-center gap-3 px-6 border-b border-slate-100 dark:border-slate-800/50">
+<div class="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">solar_power</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-sm font-bold leading-tight">SolarMonitor</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal">Admin Panel</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-1 p-4 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary">memory</span>
+<span class="text-sm font-medium">Devices</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary">notifications</span>
+<span class="text-sm font-medium">Alerts</span>
+<span class="ml-auto bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">3</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary">analytics</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+<div class="my-2 border-t border-slate-100 dark:border-slate-800 mx-3"></div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-primary dark:bg-primary/20 transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px] fill-1">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-[22px] group-hover:text-primary">support_agent</span>
+<span class="text-sm font-medium">Support</span>
+</a>
+</nav>
+<!-- User Footer -->
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<div class="h-9 w-9 rounded-full bg-cover bg-center ring-2 ring-white dark:ring-slate-700" data-alt="User avatar thumbnail" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBiQv4F1Nwr4AjOEOwPrAumyuteBOUhkTgRmt3ueIp-fUlhsoMej-HEhHXGAaATJY5df9THT-m9xbFbIItIWLJNy8ZxzLKfdHIqLVHxDwpgw2AuatNps5zbp_Ou2v4l9ginVxjd72QHUR-yfFXzjEC2_l2YlLcIIabZbkWmyMsKW79bKwFvRi_H_DgsQIcyknqm2SSbu76an201r5xRdyzdyLtKBK3RnZjv3Ckimb7LlMvVIL3DpM_fqRSPzZwP79JOZClMz_7q0ctV');"></div>
+<div class="flex flex-col overflow-hidden">
+<span class="text-sm font-semibold text-slate-900 dark:text-white truncate">John Doe</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 truncate">john@solarmonitor.io</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative">
+<!-- Mobile Header -->
+<header class="md:hidden flex items-center justify-between p-4 bg-white dark:bg-[#151b2b] border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">solar_power</span>
+<span class="font-bold text-slate-900 dark:text-white">SolarMonitor</span>
+</div>
+<button class="p-2 text-slate-500">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8 lg:px-12">
+<div class="max-w-5xl mx-auto space-y-8 pb-20">
+<!-- Breadcrumbs & Heading -->
+<div class="space-y-4">
+<div class="flex items-center text-sm text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+<a class="hover:text-primary transition-colors" href="#">Settings</a>
+<span class="mx-2 text-slate-300 dark:text-slate-600">/</span>
+<span class="text-slate-900 dark:text-slate-200 font-medium">Profile</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white">Profile Management</h1>
+<p class="mt-2 text-base text-slate-500 dark:text-slate-400">Manage your personal information, security settings, and notification preferences.</p>
+</div>
+</div>
+</div>
+<!-- Personal Information Card -->
+<section class="bg-white dark:bg-[#151b2b] rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/20">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">Personal Information</h2>
+<span class="material-symbols-outlined text-slate-400">badge</span>
+</div>
+<div class="p-6 md:p-8 space-y-8">
+<!-- Avatar Section -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+<div class="relative group">
+<div class="h-24 w-24 rounded-full bg-cover bg-center ring-4 ring-slate-50 dark:ring-slate-800 shadow-md" data-alt="Profile picture of John Doe" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBe6JqukSmTStLVnD6GBKmn23sk0ec76aY9yicsJRVEB1riK1Ov8ELqzUanU6usYZhHINEjFLGNQlph4V23J5NDg713BKnf0nJXhLVXnXZVLB2EGO0KkJyr5no19fH_rOc4MIXWzo5mgqquhLih8tRZxrMyvfh2mq3yUuPjy2gHbQDONdzR6je4H4Pq2XYj4oIZLTHPu7krm_gbhit3andk8DMByn-E6DrCNC6J1Yt1rSTKTTeu4jmP1WSFH1E5Wteo9-52qC9esGYS');"></div>
+<button class="absolute bottom-0 right-0 p-1.5 bg-primary text-white rounded-full shadow-lg hover:bg-blue-600 transition-colors border-2 border-white dark:border-slate-900 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+</div>
+<div class="space-y-1">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">John Doe</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Lead Technician • Field Operations</p>
+<button class="text-xs font-medium text-primary hover:text-blue-600 mt-1">Remove photo</button>
+</div>
+</div>
+<!-- Input Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="first_name">First Name</label>
+<input class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="first_name" type="text" value="John"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="last_name">Last Name</label>
+<input class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="last_name" type="text" value="Doe"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="email">Email Address</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[20px]">mail</span>
+<input class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 pl-10 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="email" type="email" value="john.doe@solarmonitor.io"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="phone">Phone Number</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-slate-400 text-[20px]">call</span>
+<input class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 pl-10 pr-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="phone" type="tel" value="+1 (555) 000-0000"/>
+</div>
+</div>
+<div class="space-y-2 md:col-span-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="bio">Role Description</label>
+<textarea class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none" id="bio" rows="3">Senior technician responsible for monitoring three-phase inverter arrays across the Southwest region.</textarea>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Card -->
+<section class="bg-white dark:bg-[#151b2b] rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/20">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">Security &amp; Password</h2>
+<span class="material-symbols-outlined text-slate-400">lock</span>
+</div>
+<div class="p-6 md:p-8 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<div class="md:col-span-4">
+<h3 class="text-sm font-semibold text-slate-900 dark:text-white">Change Password</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Ensure your account is using a long, random password to stay secure.</p>
+</div>
+<div class="md:col-span-8 space-y-4">
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="current_password">Current Password</label>
+<input class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="current_password" placeholder="••••••••••••" type="password"/>
+<div class="flex justify-end">
+<a class="text-xs font-medium text-primary hover:text-blue-600" href="#">Forgot password?</a>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="new_password">New Password</label>
+<input class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="new_password" placeholder="New password" type="password"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300" for="confirm_password">Confirm Password</label>
+<input class="w-full rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" id="confirm_password" placeholder="Confirm password" type="password"/>
+</div>
+</div>
+<div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border border-blue-100 dark:border-blue-900/50 flex gap-3 items-start">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400 text-sm mt-0.5">info</span>
+<p class="text-xs text-blue-700 dark:text-blue-300 leading-relaxed">Password must contain at least 8 characters, including one uppercase letter, one number, and one special character.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Preferences Card -->
+<section class="bg-white dark:bg-[#151b2b] rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/20">
+<h2 class="text-lg font-bold text-slate-900 dark:text-white">Notifications</h2>
+<span class="material-symbols-outlined text-slate-400">notifications_active</span>
+</div>
+<div class="p-6 md:p-8 space-y-6">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-900 dark:text-white">System Fault Alerts</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Receive immediate emails when an inverter reports a critical fault.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="h-px bg-slate-100 dark:bg-slate-800 w-full"></div>
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-sm font-semibold text-slate-900 dark:text-white">Weekly Performance Reports</span>
+<span class="text-xs text-slate-500 dark:text-slate-400">Summary of energy generation sent every Monday morning.</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-slate-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Actions -->
+<div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800 md:border-none md:pt-0">
+<button class="px-5 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+                            Cancel
+                        </button>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-blue-600 shadow-md shadow-blue-500/20 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                            Save Changes
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Settings - Inverter Monitor</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a2332",
+                        "border-light": "#e7ebf3",
+                        "border-dark": "#2d3748",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display transition-colors duration-200">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark px-10 py-3 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Inverter Monitor</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Analytics</a>
+<a class="text-primary text-sm font-medium leading-normal" href="#">Settings</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Logs</a>
+</nav>
+<div class="bg-center bg-no-repeat bg-cover rounded-full size-10 border-2 border-white dark:border-slate-700 shadow-sm" data-alt="Profile picture of the logged in administrator" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA6FVPr0GIpLx61P1UuIazyN2heGNdXqk-mVAtqNXQFX3-lBRYfSKDnKyAshtOGG2htqb8ThNzONoI6U6LG95aCOuaOPFmpl05SvmzGrF43x-d7AjEML0Lj-A0aPsLETpFnaTyUPWfHhypK07Kde94lMwTvH_WfvlK1T2IZhyKTe5qsEeN1g3P-_Jc_bLurmY9FZdOaZkCD9E1uPo3N8p6ilNvd2CGjFhIQcicl_KFSqqSY9mcvBVoHMNg4GeA4uog0dCsLs81Edm-x");'></div>
+</div>
+</header>
+<div class="flex flex-1 justify-center py-8 px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col w-full max-w-[1200px] flex-1">
+<!-- Page Heading -->
+<div class="mb-8">
+<div class="flex flex-wrap justify-between gap-3">
+<div class="flex flex-col gap-2">
+<p class="text-4xl font-black leading-tight tracking-[-0.033em]">Admin Settings</p>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal leading-normal">Manage system configurations, users, and application preferences.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg px-4 h-10 bg-surface-light dark:bg-surface-dark border border-border-light dark:border-border-dark text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                            Discard
+                        </button>
+<button class="flex items-center justify-center rounded-lg px-4 h-10 bg-primary text-white hover:bg-blue-700 text-sm font-bold shadow-md shadow-blue-500/20 transition-colors">
+                            Save Changes
+                        </button>
+</div>
+</div>
+</div>
+<!-- Main Layout Grid -->
+<div class="flex flex-col lg:flex-row gap-8 items-start">
+<!-- Side Navigation -->
+<aside class="w-full lg:w-64 shrink-0 lg:sticky lg:top-24">
+<div class="flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark p-4">
+<div class="flex flex-col gap-4">
+<div class="flex flex-col px-3 pt-2">
+<h1 class="text-base font-bold leading-normal">Settings Menu</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal">Navigate categories</p>
+</div>
+<div class="flex flex-col gap-1">
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-all" href="#user-management">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<p class="text-sm font-medium leading-normal">User Management</p>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" href="#system-config">
+<span class="material-symbols-outlined text-[20px]">settings_input_component</span>
+<p class="text-sm font-medium leading-normal">System Config</p>
+</a>
+<a class="group flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all" href="#app-settings">
+<span class="material-symbols-outlined text-[20px]">display_settings</span>
+<p class="text-sm font-medium leading-normal">App Settings</p>
+</a>
+</div>
+</div>
+</div>
+</aside>
+<!-- Content Area -->
+<main class="flex-1 min-w-0 flex flex-col gap-8">
+<!-- Section: User Management -->
+<section class="scroll-mt-24" id="user-management">
+<div class="flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark overflow-hidden">
+<!-- Hero Image for Section -->
+<div class="relative h-48 bg-cover bg-center" data-alt="Abstract blue geometric pattern representing digital connection" style='background-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuDRbcm2domgzRUok-iii4Pg7Q5hspXNbmnIQ7FvHhaMg-Runl3iyTnQaJpcQRmSXTeMS-KmkPo5vDXcBxtHTCYUrMOiioTCrfM2uvZpXpU7BkD3KFBzOVarK7mGvwXHWNVtxlL74KsiWUq-THwCl5IhvcS_0FxEVFcoC0K__HsOGts5_IF4LKahB7Os8ZK2kj2AK1VMUNNL83jpU0F1IDf2fnVolOwj3aQeE7z2EWKvhFNmQZ2T5dvTuAwh4zoF3qSUBuXr2W_9Bquc");'>
+<div class="absolute bottom-0 left-0 p-6">
+<h3 class="text-white text-2xl font-bold">User Management</h3>
+<p class="text-white/80 text-sm">Control access and permissions</p>
+</div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-6">
+<div class="relative w-full max-w-xs">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</span>
+<input class="w-full py-2 pl-10 pr-4 text-sm bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg focus:border-primary focus:ring-1 focus:ring-primary placeholder-slate-400 dark:placeholder-slate-500 text-slate-900 dark:text-white transition-colors" placeholder="Search users..." type="text"/>
+</div>
+<button class="flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white gap-2 pl-3 hover:bg-blue-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span class="text-sm font-bold">Add User</span>
+</button>
+</div>
+<div class="overflow-x-auto rounded-lg border border-border-light dark:border-border-dark">
+<table class="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+<thead class="bg-background-light dark:bg-background-dark text-xs uppercase text-slate-500 dark:text-slate-400 font-semibold">
+<tr>
+<th class="px-6 py-3" scope="col">Name</th>
+<th class="px-6 py-3" scope="col">Role</th>
+<th class="px-6 py-3" scope="col">Status</th>
+<th class="px-6 py-3" scope="col">Last Active</th>
+<th class="px-6 py-3 text-right" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-light dark:divide-border-dark bg-surface-light dark:bg-surface-dark">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center text-primary font-bold">AS</div>
+<div class="font-medium text-slate-900 dark:text-white">Alice Smith</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-purple-50 dark:bg-purple-900/30 px-2 py-1 text-xs font-medium text-purple-700 dark:text-purple-400 ring-1 ring-inset ring-purple-700/10">Admin</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/30 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400">
+<span class="h-1.5 w-1.5 rounded-full bg-green-500"></span> Active
+                                                    </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">2 mins ago</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-orange-100 dark:bg-orange-900 flex items-center justify-center text-orange-600 font-bold">JD</div>
+<div class="font-medium text-slate-900 dark:text-white">John Doe</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-slate-100 dark:bg-slate-800 px-2 py-1 text-xs font-medium text-slate-600 dark:text-slate-400 ring-1 ring-inset ring-slate-500/10">Viewer</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/30 px-2 py-1 text-xs font-medium text-green-700 dark:text-green-400">
+<span class="h-1.5 w-1.5 rounded-full bg-green-500"></span> Active
+                                                    </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">4 hours ago</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-500 font-bold">MK</div>
+<div class="font-medium text-slate-900 dark:text-white">Mike K.</div>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center rounded-md bg-slate-100 dark:bg-slate-800 px-2 py-1 text-xs font-medium text-slate-600 dark:text-slate-400 ring-1 ring-inset ring-slate-500/10">Viewer</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 rounded-full bg-red-100 dark:bg-red-900/30 px-2 py-1 text-xs font-medium text-red-700 dark:text-red-400">
+<span class="h-1.5 w-1.5 rounded-full bg-red-500"></span> Inactive
+                                                    </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">10 days ago</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-slate-400 hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">edit</span></button>
+<button class="text-slate-400 hover:text-red-500 transition-colors p-1"><span class="material-symbols-outlined text-[20px]">delete</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-4 flex items-center justify-between text-sm text-slate-500 dark:text-slate-400">
+<p>Showing 3 of 12 users</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded border border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50">Previous</button>
+<button class="px-3 py-1 rounded border border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800">Next</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: System Configuration -->
+<section class="scroll-mt-24" id="system-config">
+<div class="flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+<div class="border-b border-border-light dark:border-border-dark p-6">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">bolt</span>
+                                    Inverter Configuration
+                                </h3>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Adjust safety thresholds and operating parameters.</p>
+</div>
+<div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Voltage Limits -->
+<div class="flex flex-col gap-4">
+<h4 class="text-sm font-semibold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Voltage Protection</h4>
+<div class="space-y-4">
+<div class="group">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Max Over-Voltage (AC)</label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2.5 px-3 pr-12 text-sm focus:border-primary focus:ring-primary dark:text-white" type="number" value="250"/>
+<span class="absolute right-3 text-slate-400 text-sm font-medium">Volts</span>
+</div>
+<p class="mt-1 text-xs text-slate-500">System will trip if voltage exceeds this limit.</p>
+</div>
+<div class="group">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Min Under-Voltage (AC)</label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2.5 px-3 pr-12 text-sm focus:border-primary focus:ring-primary dark:text-white" type="number" value="190"/>
+<span class="absolute right-3 text-slate-400 text-sm font-medium">Volts</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Frequency Limits -->
+<div class="flex flex-col gap-4">
+<h4 class="text-sm font-semibold uppercase text-slate-500 dark:text-slate-400 tracking-wider">Frequency Limits</h4>
+<div class="space-y-4">
+<div class="group">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Max Frequency</label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2.5 px-3 pr-12 text-sm focus:border-primary focus:ring-primary dark:text-white" step="0.1" type="number" value="62.5"/>
+<span class="absolute right-3 text-slate-400 text-sm font-medium">Hz</span>
+</div>
+</div>
+<div class="group">
+<label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Min Frequency</label>
+<div class="relative flex items-center">
+<input class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2.5 px-3 pr-12 text-sm focus:border-primary focus:ring-primary dark:text-white" step="0.1" type="number" value="47.5"/>
+<span class="absolute right-3 text-slate-400 text-sm font-medium">Hz</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Alerts Toggle Section -->
+<div class="md:col-span-2 border-t border-border-light dark:border-border-dark pt-6 mt-2">
+<h4 class="text-sm font-semibold uppercase text-slate-500 dark:text-slate-400 tracking-wider mb-4">Alert Notifications</h4>
+<div class="flex flex-col md:flex-row gap-6">
+<label class="flex items-center justify-between p-4 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark cursor-pointer hover:border-primary transition-colors w-full">
+<div class="flex flex-col">
+<span class="font-medium text-slate-900 dark:text-white">Email Alerts</span>
+<span class="text-xs text-slate-500">Send critical faults to admin email.</span>
+</div>
+<div class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary">
+<span class="translate-x-6 inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+</div>
+</label>
+<label class="flex items-center justify-between p-4 rounded-lg border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark cursor-pointer hover:border-primary transition-colors w-full">
+<div class="flex flex-col">
+<span class="font-medium text-slate-900 dark:text-white">SMS Alerts</span>
+<span class="text-xs text-slate-500">Immediate text notifications.</span>
+</div>
+<div class="relative inline-flex h-6 w-11 items-center rounded-full bg-slate-300 dark:bg-slate-600">
+<span class="translate-x-1 inline-block h-4 w-4 transform rounded-full bg-white transition"></span>
+</div>
+</label>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: App Settings -->
+<section class="scroll-mt-24 pb-12" id="app-settings">
+<div class="flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-border-light dark:border-border-dark">
+<div class="border-b border-border-light dark:border-border-dark p-6">
+<h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">tune</span>
+                                    App Preferences
+                                </h3>
+<p class="mt-1 text-sm text-slate-500 dark:text-slate-400">Customize your dashboard experience.</p>
+</div>
+<div class="p-6 flex flex-col gap-8">
+<!-- Theme Selection -->
+<div>
+<label class="text-base font-semibold text-slate-900 dark:text-white block mb-3">Interface Theme</label>
+<div class="grid grid-cols-3 gap-4 max-w-lg">
+<label class="cursor-pointer">
+<input checked="" class="peer sr-only" name="theme" type="radio"/>
+<div class="flex flex-col items-center justify-center p-4 rounded-lg border border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-2xl mb-2 text-slate-600 dark:text-slate-400 peer-checked:text-primary">light_mode</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300 peer-checked:text-primary">Light</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="theme" type="radio"/>
+<div class="flex flex-col items-center justify-center p-4 rounded-lg border border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-2xl mb-2 text-slate-600 dark:text-slate-400 peer-checked:text-primary">dark_mode</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300 peer-checked:text-primary">Dark</span>
+</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="theme" type="radio"/>
+<div class="flex flex-col items-center justify-center p-4 rounded-lg border border-border-light dark:border-border-dark hover:bg-slate-50 dark:hover:bg-slate-800 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-2xl mb-2 text-slate-600 dark:text-slate-400 peer-checked:text-primary">settings_system_daydream</span>
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300 peer-checked:text-primary">System</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Unit Selection -->
+<div>
+<label class="text-base font-semibold text-slate-900 dark:text-white block mb-3">Measurement Units</label>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl">
+<div class="flex flex-col gap-2">
+<label class="text-sm text-slate-500 dark:text-slate-400">Temperature</label>
+<select class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2.5 px-3 text-sm focus:border-primary focus:ring-primary dark:text-white">
+<option>Celsius (°C)</option>
+<option>Fahrenheit (°F)</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm text-slate-500 dark:text-slate-400">Power Output</label>
+<select class="block w-full rounded-lg border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark py-2.5 px-3 text-sm focus:border-primary focus:ring-primary dark:text-white">
+<option>Kilowatts (kW)</option>
+<option>Megawatts (MW)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Inverter Monitoring Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f8fafc", // Slightly updated for better contrast
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem", 
+                        "lg": "0.75rem", 
+                        "xl": "1rem", 
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-white h-screen flex flex-col overflow-hidden">
+<!-- Top Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-[#1a202c] px-6 py-4 shadow-sm z-10 shrink-0">
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center size-10 rounded-full bg-primary/10 text-primary">
+<span class="material-symbols-outlined text-2xl">electric_bolt</span>
+</div>
+<div>
+<h2 class="text-[#0d121b] dark:text-white text-lg font-bold leading-tight">Inverter Station Alpha</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-xs font-medium text-gray-500 dark:text-gray-400">System Online • Last updated: 2s ago</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex flex-col items-end">
+<p class="text-sm font-semibold text-[#0d121b] dark:text-white">October 24, 2023</p>
+<p class="text-xs text-gray-500 dark:text-gray-400">10:42 AM PST</p>
+</div>
+<div class="h-8 w-px bg-[#e7ebf3] dark:bg-gray-700 hidden md:block"></div>
+<div class="flex gap-3">
+<button class="relative flex size-10 items-center justify-center rounded-full bg-white dark:bg-gray-800 border border-[#e7ebf3] dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span class="absolute top-2 right-2 size-2 rounded-full bg-red-500 border border-white dark:border-gray-800"></span>
+</button>
+<button class="flex items-center gap-2 pl-2 pr-4 h-10 rounded-full bg-white dark:bg-gray-800 border border-[#e7ebf3] dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+<div class="size-7 rounded-full bg-gradient-to-tr from-primary to-blue-400 flex items-center justify-center text-white text-xs font-bold">
+                        JD
+                    </div>
+<span class="text-sm font-medium text-[#0d121b] dark:text-white hidden sm:block">John Doe</span>
+<span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar Navigation (Desktop) -->
+<aside class="hidden lg:flex w-64 flex-col border-r border-[#e7ebf3] dark:border-gray-800 bg-white dark:bg-[#1a202c] pt-6 pb-4">
+<nav class="flex flex-col gap-2 px-3">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 text-primary font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                    Analytics
+                </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">warning</span>
+                    Alerts
+                    <span class="ml-auto bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white transition-colors font-medium" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="mt-auto px-6">
+<div class="bg-gray-50 dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
+<p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Device Health</p>
+<div class="flex items-center justify-between mb-1">
+<span class="text-sm font-medium">Efficiency</span>
+<span class="text-sm font-bold text-emerald-600">98%</span>
+</div>
+<div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+<div class="bg-emerald-500 h-1.5 rounded-full" style="width: 98%"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto p-4 lg:p-8 relative">
+<div class="max-w-6xl mx-auto flex flex-col gap-8">
+<!-- Section: Real-time Performance -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<div>
+<h1 class="text-2xl font-bold text-[#0d121b] dark:text-white leading-tight">Real-time Performance</h1>
+<p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Monitoring three-phase output metrics.</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 border border-[#e7ebf3] dark:border-gray-700 rounded-lg text-sm font-semibold text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Export Report
+                        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Power Card -->
+<div class="bg-white dark:bg-[#1a202c] rounded-xl p-6 border border-[#e7ebf3] dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<span class="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold px-2 py-1 rounded">Normal</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium uppercase tracking-wide">Total Power Output</p>
+<div class="flex items-baseline gap-2 mt-1 mb-4">
+<h3 class="text-4xl font-bold text-[#0d121b] dark:text-white">12.5 <span class="text-xl text-gray-400 font-normal">kW</span></h3>
+<span class="flex items-center text-emerald-600 text-sm font-medium bg-emerald-50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                    2.1%
+                                </span>
+</div>
+<div class="pt-4 border-t border-gray-100 dark:border-gray-700">
+<div class="grid grid-cols-3 gap-2 text-center">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">Phase A</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">4.1 kW</p>
+</div>
+<div class="border-l border-r border-gray-100 dark:border-gray-700">
+<p class="text-[10px] text-gray-400 uppercase font-bold">Phase B</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">4.2 kW</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">Phase C</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">4.2 kW</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Voltage Card -->
+<div class="bg-white dark:bg-[#1a202c] rounded-xl p-6 border border-[#e7ebf3] dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 rounded-lg bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400">
+<span class="material-symbols-outlined">electrical_services</span>
+</div>
+<span class="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-xs font-bold px-2 py-1 rounded">Stable</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium uppercase tracking-wide">Avg. Voltage</p>
+<div class="flex items-baseline gap-2 mt-1 mb-4">
+<h3 class="text-4xl font-bold text-[#0d121b] dark:text-white">230 <span class="text-xl text-gray-400 font-normal">V</span></h3>
+<span class="flex items-center text-emerald-600 text-sm font-medium bg-emerald-50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+                                    0.5%
+                                </span>
+</div>
+<div class="pt-4 border-t border-gray-100 dark:border-gray-700">
+<div class="grid grid-cols-3 gap-2 text-center">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">L1-N</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">231 V</p>
+</div>
+<div class="border-l border-r border-gray-100 dark:border-gray-700">
+<p class="text-[10px] text-gray-400 uppercase font-bold">L2-N</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">229 V</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">L3-N</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">230 V</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Current Card -->
+<div class="bg-white dark:bg-[#1a202c] rounded-xl p-6 border border-[#e7ebf3] dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex items-center justify-between mb-4">
+<div class="p-2 rounded-lg bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400">
+<span class="material-symbols-outlined">waves</span>
+</div>
+<span class="bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-bold px-2 py-1 rounded">High Load</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-sm font-medium uppercase tracking-wide">Total Current</p>
+<div class="flex items-baseline gap-2 mt-1 mb-4">
+<h3 class="text-4xl font-bold text-[#0d121b] dark:text-white">18.2 <span class="text-xl text-gray-400 font-normal">A</span></h3>
+<span class="flex items-center text-amber-600 text-sm font-medium bg-amber-50 dark:bg-amber-900/20 px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[16px]">trending_down</span>
+                                    -1.2%
+                                </span>
+</div>
+<div class="pt-4 border-t border-gray-100 dark:border-gray-700">
+<div class="grid grid-cols-3 gap-2 text-center">
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">Phase A</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">6.1 A</p>
+</div>
+<div class="border-l border-r border-gray-100 dark:border-gray-700">
+<p class="text-[10px] text-gray-400 uppercase font-bold">Phase B</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">6.0 A</p>
+</div>
+<div>
+<p class="text-[10px] text-gray-400 uppercase font-bold">Phase C</p>
+<p class="text-sm font-semibold text-gray-700 dark:text-gray-200">6.1 A</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Power Consumption Chart -->
+<section class="flex flex-col lg:flex-row gap-6">
+<!-- Main Chart -->
+<div class="flex-1 bg-white dark:bg-[#1a202c] rounded-xl p-6 border border-[#e7ebf3] dark:border-gray-700 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+<div>
+<h2 class="text-lg font-bold text-[#0d121b] dark:text-white">Power Consumption Trends</h2>
+<p class="text-sm text-gray-500 dark:text-gray-400">Total energy usage over the past period.</p>
+</div>
+<div class="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-lg self-start sm:self-center">
+<button class="px-3 py-1.5 text-xs font-semibold rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm">Weekly</button>
+<button class="px-3 py-1.5 text-xs font-semibold rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white">Monthly</button>
+</div>
+</div>
+<div class="flex items-end gap-3 mb-6">
+<p class="text-3xl font-bold text-[#0d121b] dark:text-white">320 <span class="text-lg font-normal text-gray-500">kWh</span></p>
+<div class="flex items-center gap-1 mb-1.5 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 text-xs font-semibold">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                                12% vs last week
+                            </div>
+</div>
+<!-- Chart Area -->
+<div class="relative w-full h-64">
+<!-- Y-Axis Lines -->
+<div class="absolute inset-0 flex flex-col justify-between text-xs text-gray-400 pointer-events-none">
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full h-0 flex items-center"><span class="-mt-4">100</span></div>
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full h-0 flex items-center"><span class="-mt-4">75</span></div>
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full h-0 flex items-center"><span class="-mt-4">50</span></div>
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full h-0 flex items-center"><span class="-mt-4">25</span></div>
+<div class="border-b border-dashed border-gray-200 dark:border-gray-700 w-full h-0 flex items-center"><span class="-mt-4">0</span></div>
+</div>
+<!-- SVG Chart -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Gradient Definition -->
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#135bec" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#135bec" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Area Path -->
+<path d="M0,100 L0,70 L14.2,60 L28.5,45 L42.8,75 L57.1,30 L71.4,50 L85.7,40 L100,60 L100,100 Z" fill="url(#chartGradient)"></path>
+<!-- Line Path -->
+<path d="M0,70 L14.2,60 L28.5,45 L42.8,75 L57.1,30 L71.4,50 L85.7,40 L100,60" fill="none" stroke="#135bec" stroke-linejoin="round" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<!-- Data Points -->
+<circle cx="14.2" cy="60" fill="#fff" r="1.5" stroke="#135bec" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+<circle cx="28.5" cy="45" fill="#fff" r="1.5" stroke="#135bec" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+<circle cx="42.8" cy="75" fill="#fff" r="1.5" stroke="#135bec" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+<circle cx="57.1" cy="30" fill="#fff" r="1.5" stroke="#135bec" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+<circle cx="71.4" cy="50" fill="#fff" r="1.5" stroke="#135bec" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+<circle cx="85.7" cy="40" fill="#fff" r="1.5" stroke="#135bec" stroke-width="1" vector-effect="non-scaling-stroke"></circle>
+</svg>
+</div>
+<div class="flex justify-between mt-2 text-xs font-semibold text-gray-500 dark:text-gray-400 px-1">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+<!-- Side Panel: Phase Balance / System Health -->
+<div class="w-full lg:w-80 flex flex-col gap-6">
+<!-- Phase Balance -->
+<div class="bg-white dark:bg-[#1a202c] rounded-xl p-6 border border-[#e7ebf3] dark:border-gray-700 shadow-sm flex-1">
+<h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wide mb-4">Phase Load Balance</h3>
+<div class="relative flex items-center justify-center py-4">
+<!-- Abstract visual representation of balance -->
+<div class="relative size-32">
+<svg class="size-full -rotate-90" viewbox="0 0 36 36">
+<!-- Background Circle -->
+<path class="text-gray-200 dark:text-gray-700" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<!-- Phase A -->
+<path class="text-blue-500" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="30, 100" stroke-width="3"></path>
+<!-- Phase B -->
+<path class="text-purple-500" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="30, 100" stroke-dashoffset="-33" stroke-width="3"></path>
+<!-- Phase C -->
+<path class="text-orange-500" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="30, 100" stroke-dashoffset="-66" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center flex-col">
+<span class="text-2xl font-bold text-[#0d121b] dark:text-white">Good</span>
+<span class="text-[10px] text-gray-500 uppercase font-semibold">Balance</span>
+</div>
+</div>
+</div>
+<div class="space-y-3 mt-2">
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-2.5 rounded-full bg-blue-500"></span>
+<span class="text-gray-600 dark:text-gray-300">Phase A</span>
+</div>
+<span class="font-semibold text-gray-900 dark:text-white">33.3%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-2.5 rounded-full bg-purple-500"></span>
+<span class="text-gray-600 dark:text-gray-300">Phase B</span>
+</div>
+<span class="font-semibold text-gray-900 dark:text-white">33.6%</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="size-2.5 rounded-full bg-orange-500"></span>
+<span class="text-gray-600 dark:text-gray-300">Phase C</span>
+</div>
+<span class="font-semibold text-gray-900 dark:text-white">33.1%</span>
+</div>
+</div>
+</div>
+<!-- Recent Alerts -->
+<div class="bg-white dark:bg-[#1a202c] rounded-xl p-6 border border-[#e7ebf3] dark:border-gray-700 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-wide">Recent Alerts</h3>
+<a class="text-xs font-semibold text-primary hover:text-blue-700" href="#">View All</a>
+</div>
+<div class="space-y-4">
+<div class="flex gap-3 items-start">
+<div class="mt-0.5 min-w-[20px] text-amber-500">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">Voltage Spike - Phase B</p>
+<p class="text-xs text-gray-500 mt-0.5">Today, 10:00 AM</p>
+</div>
+</div>
+<div class="w-full h-px bg-gray-100 dark:bg-gray-700"></div>
+<div class="flex gap-3 items-start">
+<div class="mt-0.5 min-w-[20px] text-blue-500">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-gray-800 dark:text-gray-200">System Update Complete</p>
+<p class="text-xs text-gray-500 mt-0.5">Yesterday, 02:30 AM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer-like space at bottom -->
+<div class="h-10"></div>
+</main>
+<!-- Bottom Navigation for Mobile (Visible on small screens only) -->
+<nav class="lg:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-[#1a202c] border-t border-[#e7ebf3] dark:border-gray-800 px-6 py-3 flex justify-between z-20">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-medium">Analytics</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" href="#">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-[10px] font-medium">Alerts</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>

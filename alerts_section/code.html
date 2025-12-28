@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SolarAdmin - Alerts</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#135bec",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display antialiased">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Side Navigation -->
+<aside class="w-72 shrink-0 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] flex flex-col justify-between p-4 h-full">
+<div class="flex flex-col gap-6">
+<!-- Brand -->
+<div class="flex gap-3 items-center px-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 relative overflow-hidden bg-primary/10">
+<div class="absolute inset-0 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[24px]">solar_power</span>
+</div>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-normal">SolarAdmin</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Admin Console</p>
+</div>
+</div>
+<!-- Navigation -->
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">bolt</span>
+<p class="text-sm font-medium leading-normal">Inverters</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-blue-400" href="#">
+<span class="material-symbols-outlined text-[24px] filled">warning</span>
+<p class="text-sm font-medium leading-normal">Alerts</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+<!-- Bottom Actions -->
+<div class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+<p class="text-sm font-medium leading-normal">Profile</p>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-hidden relative">
+<!-- Header / Top Bar -->
+<header class="h-16 shrink-0 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111827] flex items-center justify-between px-8">
+<div class="flex items-center gap-4 text-slate-500">
+<span class="material-symbols-outlined cursor-pointer hover:text-slate-700">menu</span>
+<span class="text-sm">/ Alerts</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined text-slate-500 cursor-pointer">notifications</span>
+<span class="absolute top-0 right-0 size-2 bg-red-500 rounded-full border-2 border-white dark:border-[#111827]"></span>
+</div>
+<div class="size-8 rounded-full bg-slate-200 overflow-hidden" data-alt="User profile avatar placeholder" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAORuUBGVxhbo3D2XI-LiRAm1mGIS4JbyMyYM--9MZnuVErIcSRbm_xOiMY_639eDTRbR9txbEnuMLhCIGxe8u7u1ule9Fqsfcs5YwkE0IbaY4OGoHiqR14xtBVB85Rndy7iLrWtU5rJzOsEAgnczZ2wXxLNsZt1UuRdiUheYIe0t5jvHo4G69cK2RvHsaE6MxvZm7lotQvWLGNqlJIhmcRIwjqML2xTrUvGq5YXbnzeupS75Hto69NkZrcneJftS-ptfNRVjZ7mVc7');"></div>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-6xl mx-auto flex flex-col gap-8">
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between gap-4 items-end">
+<div class="flex flex-col gap-2">
+<h1 class="text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-[-0.033em]">System Alerts &amp; Notifications</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal">Monitor real-time incidents and review historical logs across all 3-phase inverters.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors text-sm font-medium shadow-sm">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+                            Export Log
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-colors text-sm font-medium shadow-sm shadow-blue-200 dark:shadow-none">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+                            Refresh Data
+                        </button>
+</div>
+</div>
+<!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="flex flex-col gap-1 rounded-xl p-6 bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<div class="p-2 bg-red-50 dark:bg-red-900/20 rounded-lg text-red-600 dark:text-red-400">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="text-xs font-medium text-red-600 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded-full">+2 new</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal">Active Alerts</p>
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-tight">3</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-6 bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<div class="p-2 bg-green-50 dark:bg-green-900/20 rounded-lg text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal">System Uptime</p>
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-tight">98.5%</p>
+</div>
+<div class="flex flex-col gap-1 rounded-xl p-6 bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-primary dark:text-blue-400">
+<span class="material-symbols-outlined">dns</span>
+</div>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-normal">Monitored Inverters</p>
+<p class="text-slate-900 dark:text-white text-3xl font-bold leading-tight">24/24</p>
+</div>
+</div>
+<!-- Live Feed Section -->
+<div class="flex flex-col gap-4">
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Live Feed</h2>
+<div class="flex flex-col gap-3">
+<!-- Critical Alert -->
+<div class="flex flex-col md:flex-row md:items-center gap-4 bg-white dark:bg-[#1e293b] p-4 rounded-xl border-l-4 border-red-500 shadow-sm transition-transform hover:scale-[1.01]">
+<div class="flex items-start md:items-center gap-4 grow">
+<div class="shrink-0 flex items-center justify-center rounded-lg bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 size-12">
+<span class="material-symbols-outlined">error</span>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-slate-900 dark:text-white text-base font-semibold leading-normal">Grid Failure Detected</h3>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300">Critical</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Primary grid connection lost on Inverter Block A. Switching to island mode.</p>
+<p class="text-slate-400 dark:text-slate-500 text-xs mt-1">Today, 10:42 AM • ID: ALERT-8832</p>
+</div>
+</div>
+<div class="shrink-0 flex gap-2 ml-16 md:ml-0">
+<button class="px-4 py-2 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm font-medium">Ignore</button>
+<button class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 text-sm font-medium shadow-sm shadow-red-200 dark:shadow-none">Acknowledge</button>
+</div>
+</div>
+<!-- Warning Alert -->
+<div class="flex flex-col md:flex-row md:items-center gap-4 bg-white dark:bg-[#1e293b] p-4 rounded-xl border-l-4 border-amber-500 shadow-sm transition-transform hover:scale-[1.01]">
+<div class="flex items-start md:items-center gap-4 grow">
+<div class="shrink-0 flex items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 size-12">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-slate-900 dark:text-white text-base font-semibold leading-normal">Low Voltage Detected - Phase B</h3>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300">Warning</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">Voltage dropped below threshold (380V) for &gt; 10 seconds.</p>
+<p class="text-slate-400 dark:text-slate-500 text-xs mt-1">Today, 09:15 AM • ID: ALERT-8830</p>
+</div>
+</div>
+<div class="shrink-0 flex gap-2 ml-16 md:ml-0">
+<button class="px-4 py-2 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm font-medium">Dismiss</button>
+<button class="px-4 py-2 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 text-sm font-medium">Investigate</button>
+</div>
+</div>
+<!-- Info Alert -->
+<div class="flex flex-col md:flex-row md:items-center gap-4 bg-white dark:bg-[#1e293b] p-4 rounded-xl border-l-4 border-primary shadow-sm transition-transform hover:scale-[1.01]">
+<div class="flex items-start md:items-center gap-4 grow">
+<div class="shrink-0 flex items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-400 size-12">
+<span class="material-symbols-outlined">info</span>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<h3 class="text-slate-900 dark:text-white text-base font-semibold leading-normal">Firmware Update Available</h3>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">Info</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">New patch v4.2.0 is ready for installation on Inverter-03.</p>
+<p class="text-slate-400 dark:text-slate-500 text-xs mt-1">Yesterday, 4:00 PM • ID: NOTIF-1021</p>
+</div>
+</div>
+<div class="shrink-0 flex gap-2 ml-16 md:ml-0">
+<button class="px-4 py-2 bg-white dark:bg-[#111827] border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-sm font-medium">Remind Later</button>
+<button class="px-4 py-2 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40 text-sm font-medium">Update Now</button>
+</div>
+</div>
+</div>
+</div>
+<!-- History Log Section -->
+<div class="flex flex-col gap-4">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mt-4">
+<h2 class="text-slate-900 dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">History Log</h2>
+<!-- Filters -->
+<div class="flex flex-wrap gap-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-slate-400 text-[20px]">search</span>
+<input class="pl-9 pr-3 py-1.5 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1e293b] text-sm text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none w-48 placeholder:text-slate-400" placeholder="Search alerts..." type="text"/>
+</div>
+<div class="relative">
+<select class="pl-3 pr-8 py-1.5 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1e293b] text-sm text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none appearance-none cursor-pointer">
+<option>All Severities</option>
+<option>Critical</option>
+<option>Warning</option>
+<option>Info</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2.5 text-slate-400 text-[16px] pointer-events-none">expand_more</span>
+</div>
+<div class="relative">
+<select class="pl-3 pr-8 py-1.5 h-9 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-[#1e293b] text-sm text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none appearance-none cursor-pointer">
+<option>Last 24 Hours</option>
+<option>Last 7 Days</option>
+<option>Last 30 Days</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2.5 text-slate-400 text-[16px] pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Table -->
+<div class="bg-white dark:bg-[#1e293b] border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-sm text-left">
+<thead class="text-xs text-slate-500 uppercase bg-slate-50 dark:bg-slate-800 dark:text-slate-400 border-b border-slate-200 dark:border-slate-700">
+<tr>
+<th class="px-6 py-3 font-semibold" scope="col">Timestamp</th>
+<th class="px-6 py-3 font-semibold" scope="col">Severity</th>
+<th class="px-6 py-3 font-semibold" scope="col">Message</th>
+<th class="px-6 py-3 font-semibold" scope="col">Inverter ID</th>
+<th class="px-6 py-3 font-semibold" scope="col">Status</th>
+<th class="px-6 py-3 font-semibold text-right" scope="col">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-700">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-slate-500 dark:text-slate-400 font-mono">2023-10-27 14:02</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300">
+<span class="size-1.5 rounded-full bg-red-600"></span> Critical
+                                            </span>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">DC Overvoltage</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">INV-01-A</td>
+<td class="px-6 py-4 text-green-600 font-medium">Resolved</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-slate-500 dark:text-slate-400 font-mono">2023-10-27 12:45</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300">
+<span class="size-1.5 rounded-full bg-amber-600"></span> Warning
+                                            </span>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Fan Speed Deviation</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">INV-04-B</td>
+<td class="px-6 py-4 text-slate-500">Acknowledged</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-slate-500 dark:text-slate-400 font-mono">2023-10-26 09:30</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
+<span class="size-1.5 rounded-full bg-blue-600"></span> Info
+                                            </span>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">System Reboot</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">All Systems</td>
+<td class="px-6 py-4 text-green-600 font-medium">Completed</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 whitespace-nowrap text-slate-500 dark:text-slate-400 font-mono">2023-10-26 08:15</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300">
+<span class="size-1.5 rounded-full bg-amber-600"></span> Warning
+                                            </span>
+</td>
+<td class="px-6 py-4 font-medium text-slate-900 dark:text-white">Communication Latency</td>
+<td class="px-6 py-4 text-slate-500 dark:text-slate-400">INV-02-A</td>
+<td class="px-6 py-4 text-green-600 font-medium">Resolved</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">visibility</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between">
+<span class="text-sm text-slate-500 dark:text-slate-400">Showing 1 to 4 of 12 entries</span>
+<div class="flex gap-1">
+<button class="p-1 rounded-md text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-50"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 px-3 rounded-md bg-primary text-white text-sm">1</button>
+<button class="p-1 px-3 rounded-md text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm">2</button>
+<button class="p-1 px-3 rounded-md text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 text-sm">3</button>
+<button class="p-1 rounded-md text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
